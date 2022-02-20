@@ -24,5 +24,5 @@ export class UserOnBoardingDto {
   profileLink: string;
 
   @IsJSON()
-  interested: JSON;
+  interests: JSON;
 }

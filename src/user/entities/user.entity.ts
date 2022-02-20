@@ -34,7 +34,7 @@ export class User {
   profileLink: string;
 
   @Column({ type: 'json' })
-  interested;
+  interests;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
