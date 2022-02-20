@@ -6,6 +6,6 @@ const schema = Joi.object({
   DB_PASSWORD: Joi.string().required(),
   DB_SCHEMA: Joi.string().required(),
   DB_HOST: Joi.string().required(),
-  DB_LOGGING: Joi.number(),
+  DB_LOGGING: Joi.number().required(),
 });
 export default schema;

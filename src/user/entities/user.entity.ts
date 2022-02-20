@@ -33,17 +33,8 @@ export class User {
   @Column()
   profileLink: string;
 
-  //   @Column()
-  //   interested: JSON;
-
-  @Column()
-  likes: number;
-
-  @Column()
-  disLikes: number;
-
-  @Column()
-  superLikes: number;
+  @Column({ type: 'json' })
+  interested;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
