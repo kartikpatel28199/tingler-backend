@@ -24,7 +24,10 @@ export class UserSetting {
   userId: number;
 
   @Column()
-  coordinate: string;
+  latitude: string;
+
+  @Column()
+  longitude: string;
 
   @Column({ default: Toggle.True })
   global: Toggle;
