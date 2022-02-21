@@ -6,4 +6,11 @@ export class UserRepository extends Repository<User> {
   async saveUser(user: User): Promise<User> {
     return this.save(user);
   }
+
+  async getAllUserId(userId) {
+    return this.createQueryBuilder('user')
+      .select(['user.id'])
+      .where('user.id != :id', { id: userId })
+      .getMany();
+  }
 }
