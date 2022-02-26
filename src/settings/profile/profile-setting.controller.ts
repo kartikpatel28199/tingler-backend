@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Patch } from '@nestjs/common';
+import { GetUser } from '../../common/decorator/get-user.decorator';
 import { UpdateProfileSettingDto } from './dto/update-profile-setting.dto';
 import { ProfileSettingService } from './services/profile-setting.service';
 
@@ -11,7 +12,10 @@ export class ProfileSettingController {
   }
 
   @Patch('/')
-  async updateSetting(@Body() setting: UpdateProfileSettingDto) {
-    return this.profileSettingService.updateProfileSetting(setting);
+  async updateSetting(
+    @Body() setting: UpdateProfileSettingDto,
+    @GetUser() user,
+  ) {
+    return this.profileSettingService.updateProfileSetting(setting, user);
   }
 }

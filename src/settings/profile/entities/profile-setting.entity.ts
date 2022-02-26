@@ -20,7 +20,7 @@ export class ProfileSetting {
   user: User;
 
   @Column()
-  userId: number;
+  userId: string;
 
   @Column()
   aboutMe: string;

@@ -8,13 +8,12 @@ export class UserSettingService {
   constructor(private userSettingsRepository: UserSettingsRepository) {}
 
   async createUserSetting(user: User) {
-    console.log('userid', user.id);
     const userSetting = new UserSetting();
     userSetting.userId = user.id;
     await this.userSettingsRepository.save(userSetting);
   }
 
-  async updateUserSetting(setting) {
-    return await this.userSettingsRepository.update(setting.id, setting);
+  async updateUserSetting(setting, user) {
+    return await this.userSettingsRepository.update(user.id, setting);
   }
 }

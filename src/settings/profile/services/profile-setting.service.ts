@@ -14,7 +14,7 @@ export class ProfileSettingService {
     await this.profileSettingRepository.save(profileSetting);
   }
 
-  async updateProfileSetting(setting: UpdateProfileSettingDto) {
-    return await this.profileSettingRepository.update(setting.id, setting);
+  async updateProfileSetting(setting: UpdateProfileSettingDto, user) {
+    return await this.profileSettingRepository.update(user.id, setting);
   }
 }
