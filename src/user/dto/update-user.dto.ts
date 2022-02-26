@@ -2,8 +2,6 @@ import { IsDate, IsEnum, IsJSON, IsOptional, IsString } from 'class-validator';
 import { Gender } from '../enum/gender';
 
 export class UpdateUserDto {
-  id: number;
-
   @IsString()
   @IsOptional()
   firstName?: string;

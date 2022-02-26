@@ -13,10 +13,10 @@ export class UserRating {
   id: number;
 
   @Column()
-  fromUserId: number;
+  fromUserId: string;
 
   @Column()
-  toUserId: number;
+  toUserId: string;
 
   @Column()
   likes: number;

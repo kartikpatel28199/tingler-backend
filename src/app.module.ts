@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { DatabaseConfigModule } from './database-config/database-config.module';
 import { UserModule } from './user/user.module';
 import { SettingsModule } from './settings/settings.module';
+import { FirebaseAuthStrategy } from './common/strategies/firebase.strategy';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { SettingsModule } from './settings/settings.module';
     SettingsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, FirebaseAuthStrategy],
 })
 export class AppModule {}

@@ -1,4 +1,6 @@
-import { Body, Controller, Get, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post, UseGuards } from '@nestjs/common';
+import { GetUser } from '../../common/decorator/get-user.decorator';
+import { FirebaseAuthGuard } from '../../common/guard/firebase-auth.guard';
 import { UserSettingService } from './services/user-setting.service';
 
 @Controller('user-setting')
@@ -10,8 +12,9 @@ export class UserSettingController {
     return 'pong';
   }
 
+  @UseGuards(FirebaseAuthGuard)
   @Patch('/')
-  async updateUserSetting(@Body() setting) {
-    return this.userSettingService.updateUserSetting(setting);
+  async updateUserSetting(@Body() setting, @GetUser() user) {
+    return this.userSettingService.updateUserSetting(setting, user);
   }
 }

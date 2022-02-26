@@ -21,7 +21,7 @@ export class UserSetting {
   user: User;
 
   @Column()
-  userId: number;
+  userId: string;
 
   @Column()
   latitude: string;

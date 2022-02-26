@@ -16,8 +16,8 @@ export class UserService {
     private profileSettingService: ProfileSettingService,
     private userSettingService: UserSettingService,
   ) {}
-  async createUser(userDetail: UserOnBoardingDto): Promise<User> {
-    const user = await this.generateUser(userDetail);
+  async createUser(userDetail: UserOnBoardingDto, bordingUser): Promise<User> {
+    const user = await this.generateUser(userDetail, bordingUser);
     await Promise.all([
       // Create user profile settings
       this.profileSettingService.createProfileSetting(user),
@@ -29,8 +29,9 @@ export class UserService {
     return user;
   }
 
-  async generateUser(userDetail: UserOnBoardingDto) {
+  async generateUser(userDetail: UserOnBoardingDto, bordingUser) {
     const user = new User();
+    user.id = bordingUser.uid;
     user.firstName = userDetail.firstName;
     user.lastName = userDetail.lastName;
     user.dateOfBirth = userDetail.dateOfBirth;
@@ -38,10 +39,10 @@ export class UserService {
     user.phone = userDetail.phone;
     user.profileLink = userDetail.profileLink;
 
-    return await this.userRepository.save(userDetail);
+    return await this.userRepository.save(user);
   }
 
-  async createUserNodeWithOtherUser(userId: number) {
+  async createUserNodeWithOtherUser(userId: string) {
     const userIds = await this.userRepository.getAllUserId(userId);
     const filterUserIds = userIds.map((item) => item.id);
 
@@ -55,8 +56,8 @@ export class UserService {
     this.userRatingRepository.insert(userRatings);
   }
 
-  async updateUser(user: UpdateUserDto) {
-    return this.userRepository.update(user.id, user);
+  async updateUser(userDetail: UpdateUserDto, user) {
+    return this.userRepository.update(user.id, userDetail);
   }
 
   async likeAction(fromUserId, toUserId) {
