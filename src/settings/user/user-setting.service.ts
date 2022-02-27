@@ -14,6 +14,13 @@ export class UserSettingService {
   }
 
   async updateUserSetting(setting, user) {
-    return await this.userSettingsRepository.update(user.id, setting);
+    return await this.userSettingsRepository.update(
+      { userId: user.uid },
+      setting,
+    );
+  }
+
+  async updateLocation(location, user) {
+    this.userSettingsRepository.update({ userId: user.uid }, location);
   }
 }

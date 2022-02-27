@@ -12,4 +12,10 @@ export class UserSettingController {
   async updateUserSetting(@Body() setting, @GetUser() user) {
     return this.userSettingService.updateUserSetting(setting, user);
   }
+
+  @UseGuards(FirebaseAuthGuard)
+  @Patch('/location')
+  async updateLocation(@Body() location, @GetUser() user) {
+    return this.userSettingService.updateLocation({ latitude: '1234' }, user);
+  }
 }
