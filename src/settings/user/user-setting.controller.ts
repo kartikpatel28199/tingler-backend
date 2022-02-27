@@ -7,11 +7,6 @@ import { UserSettingService } from './services/user-setting.service';
 export class UserSettingController {
   constructor(private userSettingService: UserSettingService) {}
 
-  @Get('/ping')
-  pong() {
-    return 'pong';
-  }
-
   @UseGuards(FirebaseAuthGuard)
   @Patch('/')
   async updateUserSetting(@Body() setting, @GetUser() user) {

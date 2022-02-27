@@ -16,8 +16,14 @@ export class UserService {
     private profileSettingService: ProfileSettingService,
     private userSettingService: UserSettingService,
   ) {}
-  async createUser(userDetail: UserOnBoardingDto, bordingUser): Promise<User> {
-    const user = await this.generateUser(userDetail, bordingUser);
+  async createUser(
+    userDetail: UserOnBoardingDto,
+    boardingUser,
+  ): Promise<User | string> {
+    if (await this.userRepository.findOne(boardingUser.uid)) {
+      return 'User Already exist';
+    }
+    const user = await this.generateUser(userDetail, boardingUser);
     await Promise.all([
       // Create user profile settings
       this.profileSettingService.createProfileSetting(user),
@@ -29,9 +35,9 @@ export class UserService {
     return user;
   }
 
-  async generateUser(userDetail: UserOnBoardingDto, bordingUser) {
+  async generateUser(userDetail: UserOnBoardingDto, boardingUser) {
     const user = new User();
-    user.id = bordingUser.uid;
+    user.id = boardingUser.uid;
     user.firstName = userDetail.firstName;
     user.lastName = userDetail.lastName;
     user.dateOfBirth = userDetail.dateOfBirth;

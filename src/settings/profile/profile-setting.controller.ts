@@ -6,10 +6,6 @@ import { ProfileSettingService } from './services/profile-setting.service';
 @Controller('profile-setting')
 export class ProfileSettingController {
   constructor(private profileSettingService: ProfileSettingService) {}
-  @Get('ping')
-  pong() {
-    return 'pong';
-  }
 
   @Patch('/')
   async updateSetting(
