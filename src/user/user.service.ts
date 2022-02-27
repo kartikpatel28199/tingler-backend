@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { BlockContactService } from '../block-contact/block-contact.service';
 import { ProfileSettingService } from '../settings/profile/services/profile-setting.service';
-import { UserSettingService } from '../settings/user/services/user-setting.service';
+import { UserSettingService } from '../settings/user/user-setting.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserOnBoardingDto } from './dto/user-onboarding.dto';
 import { UserRating } from './entities/user-rating.entity';
@@ -15,6 +16,7 @@ export class UserService {
     private userRatingRepository: UserRatingRepository,
     private profileSettingService: ProfileSettingService,
     private userSettingService: UserSettingService,
+    private blockContactService: BlockContactService,
   ) {}
   async createUser(
     userDetail: UserOnBoardingDto,
@@ -60,6 +62,10 @@ export class UserService {
       userRatings.push(userRating);
     });
     this.userRatingRepository.insert(userRatings);
+  }
+
+  async blockContact(blockContactId: string, user) {
+    return this.blockContactService.blockContact(blockContactId, user);
   }
 
   async updateUser(userDetail: UpdateUserDto, user) {

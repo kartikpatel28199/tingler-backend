@@ -4,7 +4,7 @@ import { ProfileSettingController } from './profile/profile-setting.controller';
 import { ProfileSettingRepository } from './profile/repositories/profile-setting.repository';
 import { ProfileSettingService } from './profile/services/profile-setting.service';
 import { UserSettingsRepository } from './user/repositories/user-settings.repository';
-import { UserSettingService } from './user/services/user-setting.service';
+import { UserSettingService } from './user/user-setting.service';
 import { UserSettingController } from './user/user-setting.controller';
 
 @Module({
