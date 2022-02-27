@@ -9,10 +9,12 @@ export class UserRepository extends Repository<User> {
 
   async discoverUser(user) {
     const query = `
-    SELECT * FROM user 
+    SELECT *, TIMESTAMPDIFF(YEAR, dateOfBirth, CURDATE()) as Age FROM user 
       INNER JOIN profile_setting on user.id = profile_setting.userId AND profile_setting.deletedAt is null
       inner join user_setting on user.id = user_setting.userId AND user_setting.deletedAt is null
-    where user.deletedAt is NULL `;
+    where user.deletedAt is NULL 
+    HAVING age>=user_setting.age_min and age <=user_setting.age_max
+    `;
     // AND user.id != '${user.uid}'
     const result = await this.query(query);
     return result;
