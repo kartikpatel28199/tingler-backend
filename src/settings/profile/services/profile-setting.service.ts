@@ -11,10 +11,10 @@ export class ProfileSettingService {
   async createProfileSetting(user: User) {
     const profileSetting = new ProfileSetting();
     profileSetting.userId = user.id;
-    await this.profileSettingRepository.save(profileSetting);
+    return this.profileSettingRepository.save(profileSetting);
   }
 
   async updateProfileSetting(setting: UpdateProfileSettingDto, user) {
-    return await this.profileSettingRepository.update(user.id, setting);
+    return this.profileSettingRepository.update(user.id, setting);
   }
 }

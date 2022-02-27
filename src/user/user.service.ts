@@ -64,6 +64,10 @@ export class UserService {
     this.userRatingRepository.insert(userRatings);
   }
 
+  async discover(user) {
+    return this.userRepository.discoverUser(user);
+  }
+
   async blockContact(blockContactId: string, user) {
     return this.blockContactService.blockContact(blockContactId, user);
   }

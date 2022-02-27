@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Param,
   Patch,
   Post,
@@ -46,5 +47,10 @@ export class UserController {
   @Patch('/superLike-action')
   async superLikeAction(@Body() { fromUserId, toUserId }) {
     return this.userService.superLikeAction(fromUserId, toUserId);
+  }
+
+  @Get('/discover')
+  async discoverUser(@GetUser() user) {
+    return this.userService.discover(user);
   }
 }

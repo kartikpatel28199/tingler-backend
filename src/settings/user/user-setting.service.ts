@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '../../user/entities/user.entity';
 import { UserSetting } from './entities/user-setting.entity';
-import { UserSettingsRepository } from './repositories/user-settings.repository';
+import { UserSettingsRepository } from './repositories/user-setting.repository';
 
 @Injectable()
 export class UserSettingService {
@@ -10,7 +10,7 @@ export class UserSettingService {
   async createUserSetting(user: User) {
     const userSetting = new UserSetting();
     userSetting.userId = user.id;
-    await this.userSettingsRepository.save(userSetting);
+    return this.userSettingsRepository.save(userSetting);
   }
 
   async updateUserSetting(setting, user) {

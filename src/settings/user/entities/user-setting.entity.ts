@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,7 +17,7 @@ export class UserSetting {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User)
+  @OneToOne(() => User)
   user: User;
 
   @Column()
@@ -39,7 +39,10 @@ export class UserSetting {
   showMe: Interested;
 
   @Column()
-  ageRange: string;
+  age_min: number;
+
+  @Column()
+  age_max: number;
 
   @Column({ default: Toggle.True })
   tinglerAlert: Toggle;

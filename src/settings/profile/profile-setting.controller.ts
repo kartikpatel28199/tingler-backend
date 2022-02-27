@@ -12,6 +12,6 @@ export class ProfileSettingController {
     @Body() setting: UpdateProfileSettingDto,
     @GetUser() user,
   ) {
-    return this.profileSettingService.updateProfileSetting(setting, user);
+    return await this.profileSettingService.updateProfileSetting(setting, user);
   }
 }

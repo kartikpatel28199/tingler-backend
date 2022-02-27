@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { ProfileSetting } from '../../settings/profile/entities/profile-setting.entity';
+import { UserSetting } from '../../settings/user/entities/user-setting.entity';
 
 @Entity()
 export class User {
@@ -44,4 +47,10 @@ export class User {
 
   @DeleteDateColumn({ type: 'timestamp' })
   deletedAt: Date;
+
+  @OneToOne(() => UserSetting, (setting) => setting.user)
+  setting: UserSetting;
+
+  @OneToOne(() => ProfileSetting, (profileSetting) => profileSetting.user)
+  profileSetting: ProfileSetting;
 }
