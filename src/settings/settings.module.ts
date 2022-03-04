@@ -6,16 +6,29 @@ import { ProfileSettingService } from './profile/services/profile-setting.servic
 import { UserSettingsRepository } from './user/repositories/user-setting.repository';
 import { UserSettingService } from './user/user-setting.service';
 import { UserSettingController } from './user/user-setting.controller';
+import { UserProfileProgressRepository } from './profile/repositories/user-profile-progress.repository';
+import { ProfileProgressStepRepository } from './profile/repositories/profile-progress-step.repository';
+import { UserProfileProgressService } from './profile/services/user-profile-progress.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
       ProfileSettingRepository,
       UserSettingsRepository,
+      UserProfileProgressRepository,
+      ProfileProgressStepRepository,
     ]),
   ],
   controllers: [UserSettingController, ProfileSettingController],
-  providers: [UserSettingService, ProfileSettingService],
-  exports: [UserSettingService, ProfileSettingService],
+  providers: [
+    UserSettingService,
+    ProfileSettingService,
+    UserProfileProgressService,
+  ],
+  exports: [
+    UserSettingService,
+    ProfileSettingService,
+    UserProfileProgressService,
+  ],
 })
 export class SettingsModule {}

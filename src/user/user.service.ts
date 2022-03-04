@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BlockContactService } from '../block-contact/block-contact.service';
 import { ProfileSettingService } from '../settings/profile/services/profile-setting.service';
+import { UserProfileProgressService } from '../settings/profile/services/user-profile-progress.service';
 import { UserSettingService } from '../settings/user/user-setting.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserOnBoardingDto } from './dto/user-onboarding.dto';
@@ -17,6 +18,7 @@ export class UserService {
     private profileSettingService: ProfileSettingService,
     private userSettingService: UserSettingService,
     private blockContactService: BlockContactService,
+    private userProfileProgress: UserProfileProgressService,
   ) {}
   async createUser(
     userDetail: UserOnBoardingDto,
@@ -32,6 +34,9 @@ export class UserService {
 
       // Create user setting
       this.userSettingService.createUserSetting(user),
+
+      // Add user profile
+      this.userProfileProgress.createUserProfileProgress(user),
     ]);
     this.createUserNodeWithOtherUser(user.id);
     return user;

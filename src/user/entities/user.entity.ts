@@ -3,11 +3,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { ProfileSetting } from '../../settings/profile/entities/profile-setting.entity';
+import { UserProfileProgress } from '../../settings/profile/entities/user-profile-progress.entity';
 import { UserSetting } from '../../settings/user/entities/user-setting.entity';
 
 @Entity()
@@ -53,4 +55,10 @@ export class User {
 
   @OneToOne(() => ProfileSetting, (profileSetting) => profileSetting.user)
   profileSetting: ProfileSetting;
+
+  @OneToMany(
+    () => UserProfileProgress,
+    (userProfileProgress) => userProfileProgress.user,
+  )
+  userProfileProgress: UserProfileProgress[];
 }
