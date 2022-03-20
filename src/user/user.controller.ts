@@ -7,13 +7,17 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { GetUser } from '../common/decorator/get-user.decorator';
 import { FirebaseAuthGuard } from '../common/guard/firebase-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserActionDto } from './dto/user-action.dto';
 import { UserOnBoardingDto } from './dto/user-onboarding.dto';
 import { UserService } from './user.service';
 
 @UseGuards(FirebaseAuthGuard)
+@ApiBearerAuth()
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
@@ -30,23 +34,22 @@ export class UserController {
 
   @Post('/block/:userId')
   async blockUser(@Param() { userId }, @GetUser() user) {
-    console.log('user', user);
     return this.userService.blockContact(userId, user);
   }
 
   @Patch('/like-action')
-  async likeAction(@Body() { fromUserId, toUserId }) {
-    return this.userService.likeAction(fromUserId, toUserId);
+  async likeAction(@Body() body: UserActionDto, @GetUser() user) {
+    return this.userService.likeAction(user, body.toUserId);
   }
 
   @Patch('/disLike-action')
-  async disLikeAction(@Body() { fromUserId, toUserId }) {
-    return this.userService.disLikeAction(fromUserId, toUserId);
+  async disLikeAction(@Body() body: UserActionDto, @GetUser() user) {
+    return this.userService.disLikeAction(user, body.toUserId);
   }
 
   @Patch('/superLike-action')
-  async superLikeAction(@Body() { fromUserId, toUserId }) {
-    return this.userService.superLikeAction(fromUserId, toUserId);
+  async superLikeAction(@Body() body: UserActionDto, @GetUser() user) {
+    return this.userService.superLikeAction(user, body.toUserId);
   }
 
   @Get('/discover')
