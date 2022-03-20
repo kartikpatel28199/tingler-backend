@@ -2,7 +2,6 @@ import { Interested } from '../../enums/interested';
 import { Toggle } from '../../enums/toggle';
 
 export class UpdateProfileSettingDto {
-  id: number;
   aboutMe?: string;
   passion?: string;
   jobTitle?: string;
