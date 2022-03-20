@@ -15,7 +15,7 @@ import { UserActionDto } from './dto/user-action.dto';
 import { UserOnBoardingDto } from './dto/user-onboarding.dto';
 import { UserService } from './user.service';
 
-@UseGuards(FirebaseAuthGuard)
+// @UseGuards(FirebaseAuthGuard)
 @ApiBearerAuth()
 @ApiTags('user')
 @Controller('user')
