@@ -22,6 +22,11 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Get('/')
+  ping() {
+    return 'Pong';
+  }
+
   @Post('/onBoarding')
   async signUp(@Body() body: UserOnBoardingDto, @GetUser() user) {
     return await this.userService.createUser(body, user);
